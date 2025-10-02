@@ -33,6 +33,7 @@ public class Terrorista{
     }
     void lancarGranada() {
         if (quantidadeGranadas >= 1)  {
+
             System.out.println("Terrorista: " + nome + " lançando granada...");
             quantidadeGranadas--;
         }
@@ -51,6 +52,37 @@ public class Terrorista{
         System.out.println("Terrorista: " + nome +  " passando a vez...");
 
     }
+    public void setDano(int energia){
+        if(this.energia > 0){
+            this.energia -= energia;
+            if(this.energia > 0){
+                System.out.println("+++++++++++++++++++++++++++++++++++++++");
+                System.out.println("Terrorista: " + nome + " Levou dano!!" + " Energia atual " + this.energia);
+              
+            }
+            if(this.energia < 0){
+                this.energia = 0;
+            }
+        }
+    }
+    public String getArmamento(){
+        return armamento;
+    }
+    public int getEnergia(){
+        return energia;
+    }
+
+    public void setEnergia(int energia){
+        this.energia += energia;
+        System.out.println("+++++++++++++++++++++++++++++++++++++++");
+        System.out.println("Terrorista " + nome + " Ganhou " + energia + " de energia");
+      
+    }
+
+    
+
+
+
 
 
 
