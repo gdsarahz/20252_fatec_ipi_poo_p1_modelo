@@ -2,7 +2,7 @@ public class Bomba {
     private Boolean bombaArmada;
     private Boolean bombaDesarmada;
 
-    public Bomba(){
+    public Bomba() {
         this.bombaArmada = false;
         this.bombaDesarmada = false;
     }
