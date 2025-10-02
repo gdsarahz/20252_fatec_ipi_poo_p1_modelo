@@ -3,8 +3,9 @@ public class Policial {
     private int energia = 10;
     private int quantidadeGranadas = 5;
     private String armamento;
+    private Bomba bombaDesarmada;
 
-    Policial (String nome, int energia, int quantidadeGranadas,String armamento) {
+    Policial (String nome, int energia, int quantidadeGranadas,String armamento,Bomba bombaDesarmada) {
         if (nome != null && nome.length() >= 4) {
             this.nome = nome;
 
@@ -19,11 +20,13 @@ public class Policial {
                 || armamento.equalsIgnoreCase("Pistola")) {
             this.armamento = armamento;
         }
+        this.bombaDesarmada = bombaDesarmada;
 
     }
 
 
     void desarmarBomba() {
+        bombaDesarmada.setBombaDesarmada(true);
         System.out.println("Policial: " + nome + " desarmando a bomba...");
 
     }

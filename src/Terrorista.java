@@ -3,11 +3,11 @@ public class Terrorista{
     private int energia = 10;
     private int quantidadeGranadas = 5;
     private String armamento;
-
+    private Bomba bombaArmada;
 
 
     
-    Terrorista (String nome,int energia, int quantidadeGranadas,String armamento) {
+    Terrorista (String nome,int energia, int quantidadeGranadas,String armamento,Bomba bombaArmada) {
         if (nome != null && nome.length() >= 4) {
             this.nome = nome;
 
@@ -22,12 +22,15 @@ public class Terrorista{
                 || armamento.equalsIgnoreCase("Pistola")) {
             this.armamento = armamento;
         }
+        this.bombaArmada = bombaArmada;
 
     }
 
     
     void PlantarBomba() {
+        bombaArmada.setBombaArmada(true);
         System.out.println("Terrorista: " + nome + " plantando a bomba...");
+
         
 
     }

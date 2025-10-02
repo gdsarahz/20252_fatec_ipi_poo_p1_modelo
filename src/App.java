@@ -3,16 +3,20 @@ import java.util.Random;
 public class App {
     public static void main(String[] args) throws Exception {
         var gerandor = new Random();
-        var t1 = new Terrorista("Gabriel", 4, 4, "Pistola"); 
-        var p2 = new Policial("Hank", 7, 5, "Pistola");
-        var p1 = new Policial("Igor", 5, 2, "Fuzil"); 
+        var bomba = new Bomba();
+        var t1 = new Terrorista("Gabriel", 4, 4, "Pistola",bomba); 
+        var p2 = new Policial("Hank", 7, 5, "Pistola",bomba);
+        var p1 = new Policial("Igor", 5, 2, "Fuzil",bomba); 
+        
+     
+        
         // loop do jogo
         while (true) {
+            var acaoTerrorista = gerandor.nextInt(4) + 1;
             var movimentaPrimeiro = 1 + gerandor.nextInt(4);
             var ganhoEnergia = 1 + gerandor.nextInt(2);
             if (movimentaPrimeiro == 1 || movimentaPrimeiro == 3) {
                 System.out.println("Terrorista faz a primeira ação");
-                var acaoTerrorista = gerandor.nextInt(4) + 1;
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
                 switch (acaoTerrorista) {
                     case 1:
@@ -170,7 +174,6 @@ public class App {
                         break;
                 }
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
-                var acaoTerrorista = gerandor.nextInt(4) + 1;
                 switch (acaoTerrorista) {
                     case 1:
                         if(t1.getEnergia() > 0){
@@ -221,7 +224,17 @@ public class App {
                         break;
                 }
             }
-            
+
+            if(bomba.isPlantada() && !bomba.isDesarmada()){
+                System.out.println("+++++++++++++++++++++++++++++++++++++++");
+                System.out.println("Bomba explodiu! Terrorista venceu");
+                break;
+            } else if(bomba.isPlantada() && bomba.isDesarmada()){
+                System.out.println("+++++++++++++++++++++++++++++++++++++++");
+                System.out.println("Bomba desarmada! Policial venceu");
+                break;
+            }
+
             if(p1.getEnergia() == 0 && t1.getEnergia() > 0){
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
                 System.out.println("Policial morreu.");
@@ -237,6 +250,7 @@ public class App {
                 System.out.println("Policial ganhou o jogo");
                 break;
             }
+
 
 
             System.out.println("+++++++++++++++++++++++++++++++++++++++");
