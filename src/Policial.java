@@ -55,11 +55,11 @@ public class Policial {
         }
 
         if (armamento.equals("Fuzil")) {
-            dano = 2;
+            dano = 3;
         }
 
         if (armamento.equals("Pistola")) {
-            dano = 3;
+            dano = 2;
         }
         System.out.println("Policial: " + nome + " atacando com " + armamento + " em " + nomeMapa + "...");
 
@@ -96,10 +96,18 @@ public class Policial {
     }
 
     public void setEnergia(int energia) {
-        this.energia += energia;
-        System.out.println("+++++++++++++++++++++++++++++++++++++++");
-        System.out.println("Policial " + nome + " Ganhou " + energia + " de energia");
+        
+        if (this.energia > 0 && this.energia < 10) {
+            this.energia += energia;
 
+            if(this.energia > 10){
+                this.energia = 10;
+            }
+            System.out.println("+++++++++++++++++++++++++++++++++++++++");
+            System.out.println("Policial " + nome + " Ganhou " + energia + " de energia " + " energia atual " + this.energia);
+
+        }
+        
     }
 
 }

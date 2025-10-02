@@ -35,8 +35,8 @@ public class App {
         // loop do jogo
         while (aux <= rodadas) {
             var bomba = new Bomba();
-            var t1 = new Terrorista("Gabriel", 4, 4, "Pistola", bomba);
-            var p1 = new Policial("Igor", 5, 2, "Fuzil", bomba);
+            var t1 = new Terrorista("Gabriel", 10, 4, "Pistola", bomba);
+            var p1 = new Policial("Igor", 10, 2, "Fuzil", bomba);
 
             while (true) {
                 var acaoTerrorista = gerandor.nextInt(4) + 1;
@@ -64,10 +64,16 @@ public class App {
                         case 4:
                             if (t1.getEnergia() > 0) {
                                 t1.passarVez();
-                                p1.setEnergia(ganhoEnergia);
+                                 if(ganhoEnergia == 2 && p1.getEnergia() == 9){
+                                    p1.setEnergia(1);
+                                }
+                                else{
+                                    p1.setEnergia(ganhoEnergia);
+                                }
                             }
                             break;
                     }
+                    Thread.sleep(2000);
                     System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     var acaoPolicial = gerandor.nextInt(4) + 1;
                     switch (acaoPolicial) {
@@ -87,14 +93,20 @@ public class App {
                             }
                             break;
                         case 4:
-                            if (p1.getEnergia() > 0) {
+                             if (p1.getEnergia() > 0) {
                                 p1.passarVez();
-                                t1.setEnergia(ganhoEnergia);
+                                if(ganhoEnergia == 2 && t1.getEnergia() == 9){
+                                    t1.setEnergia(1);
+                                }
+                                else{
+                                    t1.setEnergia(ganhoEnergia);
+                                }
                             }
                             break;
                     }
 
                 }
+                Thread.sleep(2000);
                 if (movimentaPrimeiro == 2 || movimentaPrimeiro == 4) {
                     System.out.println("Policial faz a primeira ação");
                     System.out.println("+++++++++++++++++++++++++++++++++++++++");
@@ -118,10 +130,16 @@ public class App {
                         case 4:
                             if (p1.getEnergia() > 0) {
                                 p1.passarVez();
-                                t1.setEnergia(ganhoEnergia);
+                                if(ganhoEnergia == 2 && t1.getEnergia() == 9){
+                                    t1.setEnergia(1);
+                                }
+                                else{
+                                    t1.setEnergia(ganhoEnergia);
+                                }
                             }
                             break;
                     }
+                    Thread.sleep(2000);
                     System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     switch (acaoTerrorista) {
                         case 1:
@@ -142,20 +160,27 @@ public class App {
                         case 4:
                             if (t1.getEnergia() > 0) {
                                 t1.passarVez();
-                                p1.setEnergia(ganhoEnergia);
+                                 if(ganhoEnergia == 2 && p1.getEnergia() == 9){
+                                    p1.setEnergia(1);
+                                }
+                                else{
+                                    p1.setEnergia(ganhoEnergia);
+                                }
                             }
                             break;
                     }
                 }
-
+                Thread.sleep(2000);
                 if (bomba.isPlantada() && !bomba.isDesarmada()) {
                     System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     System.out.println("Bomba explodiu! Terrorista venceu");
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     tVitoria++;
                     break;
                 } else if (bomba.isPlantada() && bomba.isDesarmada()) {
                     System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     System.out.println("Bomba desarmada! Policial venceu");
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     pVitoria++;
                     break;
                 }
@@ -165,6 +190,7 @@ public class App {
                     System.out.println("Policial morreu.");
                     System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     System.out.println("Terrorista ganhou a rodada");
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     tVitoria++;
                     break;
                 }
@@ -174,6 +200,7 @@ public class App {
                     System.out.println("Terrorista morreu.");
                     System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     System.out.println("Policial ganhou a rodada");
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++");
                     pVitoria++;
                     break;
                 }
@@ -181,7 +208,7 @@ public class App {
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
 
             }
-            Thread.sleep(2000);
+
             aux++;
         }
         System.out.println("Policial: " + pVitoria + " vitorias e " + tVitoria + " derrotas\nTerrorista: " + tVitoria

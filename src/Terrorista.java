@@ -53,9 +53,9 @@ public class Terrorista {
         if (armamento.equals("Faca")) {
             dano = 1;
         } else if (armamento.equals("Fuzil")) {
-            dano = 2;
-        } else if (armamento.equals("Pistola")) {
             dano = 3;
+        } else if (armamento.equals("Pistola")) {
+            dano = 2;
         }
         System.out.println("Terrorista: " + nome + " atacando com " + armamento + " em " + nomeMapa + " ...");
 
@@ -95,9 +95,15 @@ public class Terrorista {
     }
 
     public void setEnergia(int energia) {
-        this.energia += energia;
-        System.out.println("+++++++++++++++++++++++++++++++++++++++");
-        System.out.println("Terrorista " + nome + " Ganhou " + energia + " de energia");
+        if (this.energia > 0 && this.energia < 10) {
+            this.energia += energia;
+            if(this.energia > 10){
+                this.energia = 10;
+            }
+            System.out.println("+++++++++++++++++++++++++++++++++++++++");
+            System.out.println("Terrorista " + nome + " Ganhou " + energia + " de energia " + " energia atual " + this.energia);
+
+        }
 
     }
 
