@@ -1,5 +1,7 @@
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 public class App {
     public static void main(String[] args) throws Exception {
         var gerandor = new Random();
@@ -7,10 +9,20 @@ public class App {
         var t1 = new Terrorista("Gabriel", 4, 4, "Pistola",bomba); 
         var p2 = new Policial("Hank", 7, 5, "Pistola",bomba);
         var p1 = new Policial("Igor", 5, 2, "Fuzil",bomba); 
+        int rodadas;
+        rodadas = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero de rodadas (deve ser um numero impar de 1 a 20): "));
+        while (rodadas<=0 || rodadas>=20 || rodadas%2==0)
+            rodadas = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero de rodadas (deve ser um numero impar de 1 a 20): "));
+
+        int aux = 1;
+        int pVitoria = 0;
+        int tVitoria = 0;
+
         
      
         
         // loop do jogo
+        while(aux <= rodadas) {
         while (true) {
             var acaoTerrorista = gerandor.nextInt(4) + 1;
             var movimentaPrimeiro = 1 + gerandor.nextInt(4);
@@ -228,10 +240,12 @@ public class App {
             if(bomba.isPlantada() && !bomba.isDesarmada()){
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
                 System.out.println("Bomba explodiu! Terrorista venceu");
+                tVitoria++;
                 break;
             } else if(bomba.isPlantada() && bomba.isDesarmada()){
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
                 System.out.println("Bomba desarmada! Policial venceu");
+                pVitoria++;
                 break;
             }
 
@@ -239,7 +253,8 @@ public class App {
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
                 System.out.println("Policial morreu.");
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
-                System.out.println("Terrorista ganhou o jogo");
+                System.out.println("Terrorista ganhou a rodada");
+                tVitoria++;
                 break;
             }
            
@@ -247,15 +262,20 @@ public class App {
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
                 System.out.println("Terrorista morreu.");
                 System.out.println("+++++++++++++++++++++++++++++++++++++++");
-                System.out.println("Policial ganhou o jogo");
+                System.out.println("Policial ganhou a rodada");
+                pVitoria++;
                 break;
             }
 
 
 
             System.out.println("+++++++++++++++++++++++++++++++++++++++");
-            Thread.sleep(2000);
 
         }
+        Thread.sleep(2000);
+        aux ++;
+    }
+        System.out.println("Policial: " + pVitoria + " vitorias e " + tVitoria + " derrotas\nTerrorista: " + tVitoria + " vitorias e " + pVitoria + " derrotas");
+
     }
 }
